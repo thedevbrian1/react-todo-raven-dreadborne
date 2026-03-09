@@ -58,6 +58,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 id={`"item-${index}`}
+                defaultChecked={item.isComplete}
                 onChange={() => {
                   // Find the todo item that was clicked
                   let matchedItem = todos.find(
