@@ -23,6 +23,8 @@ export default function Home() {
     filteredTodos = todos.filter((todoItem) => todoItem.isComplete);
   }
 
+  let itemsLeft = todos.filter((item) => !item.isComplete);
+
   return (
     <main className="max-w-lg mx-auto py-20">
       <h1 className="font-bold uppercase text-4xl">Todo</h1>
@@ -87,7 +89,9 @@ export default function Home() {
 
       {/* Filters */}
       <div className="flex justify-between items-center mt-4 text-gray-300">
-        <span>2 items left</span>
+        <span>
+          {itemsLeft.length} {itemsLeft.length === 1 ? "item" : "items"} left
+        </span>
         <div className="flex gap-2">
           <Filter
             text="All"
