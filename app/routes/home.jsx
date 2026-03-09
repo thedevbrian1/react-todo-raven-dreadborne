@@ -19,24 +19,12 @@ export default function Home() {
 
   console.log({ todoValue, todos });
 
-  // let filteredTodos = todos;
-  let [filteredTodos, setFilteredTodos] = useState([]);
+  let filteredTodos = todos;
 
-  // FIXME: One has to click twice to show the filtered list
-  function handleFilter() {
-    let filteredArray = todos;
-
-    if (filteredState === "all") {
-      setFilteredTodos(filteredArray);
-    } else if (filteredState === "active") {
-      filteredArray = todos.filter((todoItem) => !todoItem.isComplete);
-      console.log({ a: filteredTodos });
-      setFilteredTodos(filteredArray);
-    } else if (filteredState === "completed") {
-      filteredArray = todos.filter((todoItem) => todoItem.isComplete);
-      console.log({ c: filteredTodos });
-      setFilteredTodos(filteredArray);
-    }
+  if (filteredState === "active") {
+    filteredTodos = todos.filter((todoItem) => !todoItem.isComplete);
+  } else if (filteredState === "completed") {
+    filteredTodos = todos.filter((todoItem) => todoItem.isComplete);
   }
 
   return (
@@ -95,37 +83,6 @@ export default function Home() {
               </label>
             </li>
           ))
-        ) : todos.length > 0 ? (
-          todos.map((item, index) => (
-            <li className="flex gap-2 items-center" key={item.id}>
-              <input
-                type="checkbox"
-                id={`"item-${index}`}
-                onChange={() => {
-                  // Find the todo item that was clicked
-                  let matchedItem = todos.find(
-                    (todoItem) => todoItem.id === item.id
-                  );
-                  console.log({ matchedItem });
-                  matchedItem.isComplete = !matchedItem.isComplete;
-
-                  // Update the object in the array
-                  let modifiedArray = todos.filter(
-                    (todoItem) => todoItem.id !== item.id
-                  );
-                  console.log({ modifiedArray });
-
-                  setTodos([...modifiedArray, matchedItem]);
-                }}
-              />
-              <label
-                htmlFor={`"item-${index}`}
-                className={`${item.isComplete ? "line-through text-gray-500" : ""}`}
-              >
-                {item.task}
-              </label>
-            </li>
-          ))
         ) : (
           <li>No items yet</li>
         )}
@@ -138,7 +95,7 @@ export default function Home() {
           <button
             onClick={() => {
               setFilteredState("all");
-              handleFilter();
+              // handleFilter();
             }}
           >
             All
@@ -146,7 +103,7 @@ export default function Home() {
           <button
             onClick={() => {
               setFilteredState("active");
-              handleFilter();
+              // handleFilter();
             }}
           >
             Active
@@ -154,7 +111,7 @@ export default function Home() {
           <button
             onClick={() => {
               setFilteredState("completed");
-              handleFilter();
+              // handleFilter();
             }}
           >
             Completed
