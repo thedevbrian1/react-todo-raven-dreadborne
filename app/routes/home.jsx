@@ -60,20 +60,20 @@ export default function Home() {
                 id={`"item-${index}`}
                 defaultChecked={item.isComplete}
                 onChange={() => {
-                  // Find the todo item that was clicked
-                  let matchedItem = todos.find(
-                    (todoItem) => todoItem.id === item.id
-                  );
-                  console.log({ matchedItem });
-                  matchedItem.isComplete = !matchedItem.isComplete;
+                  // Replace the todo list with a new todo list that has the isComplete value for the matched todo item changed
 
-                  // Update the object in the array
-                  let modifiedArray = todos.filter(
-                    (todoItem) => todoItem.id !== item.id
-                  );
-                  console.log({ modifiedArray });
+                  let newArray = todos.map((todoItem) => {
+                    if (todoItem.id === item.id) {
+                      return {
+                        ...todoItem,
+                        isComplete: !todoItem.isComplete,
+                      };
+                    } else {
+                      return todoItem;
+                    }
+                  });
 
-                  setTodos([...modifiedArray, matchedItem]);
+                  setTodos(newArray);
                 }}
               />
               <label
