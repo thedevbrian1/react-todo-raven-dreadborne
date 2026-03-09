@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Welcome } from "../welcome/welcome";
 
 export function meta() {
   return [
@@ -14,10 +13,7 @@ export default function Home() {
 
   let [filteredState, setFilteredState] = useState("all");
 
-  console.log({ filteredState });
   // { task: 'Running', isComplete: false, id:1}
-
-  console.log({ todoValue, todos });
 
   let filteredTodos = todos;
 
@@ -28,8 +24,8 @@ export default function Home() {
   }
 
   return (
-    <main className="max-w-lg mx-auto">
-      <h1>Todo</h1>
+    <main className="max-w-lg mx-auto py-20">
+      <h1 className="font-bold uppercase text-4xl">Todo</h1>
       <input
         type="text"
         value={todoValue}
@@ -49,12 +45,12 @@ export default function Home() {
           }
         }}
         placeholder="Enter todo item"
-        className="border border-gray-300 p-4 rounded w-full"
+        className="border border-gray-300 p-4 rounded-lg w-full mt-8"
       />
-      <ul className="mt-8 bg-slate-800 p-4 space-y-4">
+      <ul className="mt-8 bg-slate-800 p-6 divide-y divide-gray-600 rounded-lg">
         {filteredTodos.length > 0 ? (
           filteredTodos.map((item, index) => (
-            <li className="flex gap-2 items-center" key={item.id}>
+            <li className="flex gap-2 items-center py-3" key={item.id}>
               <input
                 type="checkbox"
                 id={`"item-${index}`}
@@ -93,34 +89,39 @@ export default function Home() {
       <div className="flex justify-between items-center mt-4 text-gray-300">
         <span>2 items left</span>
         <div className="flex gap-2">
-          <button
-            onClick={() => {
-              setFilteredState("all");
-              // handleFilter();
-            }}
-          >
-            All
-          </button>
-          <button
-            onClick={() => {
-              setFilteredState("active");
-              // handleFilter();
-            }}
-          >
-            Active
-          </button>
-          <button
-            onClick={() => {
-              setFilteredState("completed");
-              // handleFilter();
-            }}
-          >
-            Completed
-          </button>
+          <Filter
+            text="All"
+            filteredState={filteredState}
+            setFilteredState={setFilteredState}
+          />
+          <Filter
+            text="Active"
+            filteredState={filteredState}
+            setFilteredState={setFilteredState}
+          />
+
+          <Filter
+            text="Completed"
+            filteredState={filteredState}
+            setFilteredState={setFilteredState}
+          />
         </div>
 
         <button>Clear completed</button>
       </div>
     </main>
+  );
+}
+
+function Filter({ text, filteredState, setFilteredState }) {
+  return (
+    <button
+      onClick={() => {
+        setFilteredState(`${text.toLowerCase()}`);
+      }}
+      className={`${text.toLowerCase() === filteredState ? "text-blue-500" : ""} active:scale-[.97] transition ease-in-out duration-300`}
+    >
+      {text}
+    </button>
   );
 }
