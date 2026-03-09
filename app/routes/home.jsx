@@ -111,7 +111,15 @@ export default function Home() {
           />
         </div>
 
-        <button>Clear completed</button>
+        <button
+          onClick={() => {
+            let newArray = todos.filter((item) => !item.isComplete);
+            setTodos(newArray);
+          }}
+          className="active:scale-[.97] transition ease-in-out duration-300"
+        >
+          Clear completed
+        </button>
       </div>
     </main>
   );
