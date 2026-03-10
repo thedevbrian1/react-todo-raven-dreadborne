@@ -2,11 +2,9 @@
 
 This demo showcases the difference between the default user experience for web applications and using view transitions for smooth animations
 
-Default link:
-`https://react-todo-raven-dreadborne.vercel.app`
+Default link:[https://react-todo-raven-dreadborne.vercel.app](https://react-todo-raven-dreadborne.vercel.app)
 
-With view transitions link:
-`https://react-todo-raven-dreadborne-git-f-3fd50b-thedevbrian1s-projects.vercel.app/`
+With view transitions link:[https://react-todo-raven-dreadborne-git-f-3fd50b-thedevbrian1s-projects.vercel.app](https://react-todo-raven-dreadborne-git-f-3fd50b-thedevbrian1s-projects.vercel.app)
 
 ## Getting Started
 
