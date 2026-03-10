@@ -27,32 +27,48 @@ export default function Home() {
 
   return (
     <main className="max-w-lg mx-auto py-20">
-      <h1 className="font-bold uppercase text-4xl">Todo</h1>
-      <input
-        type="text"
-        value={todoValue}
-        onChange={(e) => {
-          console.log({ e });
-          setTodoValue(e.target.value);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            // Wrong
-            // todos.push(todoValue);
-            setTodos([
-              ...todos,
-              { task: todoValue, isComplete: false, id: todos.length },
-            ]);
-            setTodoValue("");
-          }
-        }}
-        placeholder="Enter todo item"
-        className="border border-gray-300 p-4 rounded-lg w-full mt-8"
-      />
+      <div id="heading">
+        <h1 className="font-bold uppercase text-4xl">Todo</h1>
+        <input
+          type="text"
+          value={todoValue}
+          onChange={(e) => {
+            console.log({ e });
+            setTodoValue(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && e.target.value.trim() !== "") {
+              // Wrong
+              // todos.push(todoValue);
+              if (!document.startViewTransition) {
+                setTodos([
+                  ...todos,
+                  { task: todoValue, isComplete: false, id: todos.length },
+                ]);
+              } else {
+                document.startViewTransition(() => {
+                  setTodos([
+                    ...todos,
+                    { task: todoValue, isComplete: false, id: todos.length },
+                  ]);
+                });
+              }
+              setTodoValue("");
+            }
+          }}
+          placeholder="Enter todo item"
+          className="border border-gray-300 p-4 rounded-lg w-full mt-8"
+        />
+      </div>
+
       <ul className="mt-8 bg-slate-800 p-6 divide-y divide-gray-600 rounded-lg">
         {filteredTodos.length > 0 ? (
           filteredTodos.map((item, index) => (
-            <li className="flex gap-2 items-center py-3" key={item.id}>
+            <li
+              className="flex gap-2 items-center py-3"
+              key={item.id}
+              // style={{ viewTransitionName: `list-item-${item.id}` }}
+            >
               <input
                 type="checkbox"
                 id={`"item-${index}`}
@@ -71,7 +87,11 @@ export default function Home() {
                     }
                   });
 
-                  setTodos(newArray);
+                  if (!document.startViewTransition) {
+                    setTodos(newArray);
+                  } else {
+                    document.startViewTransition(() => setTodos(newArray));
+                  }
                 }}
               />
               <label
@@ -88,9 +108,13 @@ export default function Home() {
       </ul>
 
       {/* Filters */}
-      <div className="flex justify-between items-center mt-4 text-gray-300">
-        <span>
-          {itemsLeft.length} {itemsLeft.length === 1 ? "item" : "items"} left
+      <div
+        // id="filters"
+        className="flex justify-between items-center mt-4 text-gray-300"
+      >
+        <span id="items-left">
+          <span id="items-count">{itemsLeft.length}</span>{" "}
+          {itemsLeft.length === 1 ? "item" : "items"} left
         </span>
         <div className="flex gap-2">
           <Filter
@@ -117,6 +141,7 @@ export default function Home() {
             setTodos(newArray);
           }}
           className="active:scale-[.97] transition ease-in-out duration-300"
+          style={{ viewTransitionName: `clear-completed` }}
         >
           Clear completed
         </button>
@@ -129,9 +154,16 @@ function Filter({ text, filteredState, setFilteredState }) {
   return (
     <button
       onClick={() => {
-        setFilteredState(`${text.toLowerCase()}`);
+        if (!document.startViewTransition) {
+          setFilteredState(`${text.toLowerCase()}`);
+        } else {
+          document.startViewTransition(() => {
+            setFilteredState(`${text.toLowerCase()}`);
+          });
+        }
       }}
       className={`${text.toLowerCase() === filteredState ? "text-blue-500" : ""} active:scale-[.97] transition ease-in-out duration-300`}
+      style={{ viewTransitionName: `filter-btn-${text}` }}
     >
       {text}
     </button>
