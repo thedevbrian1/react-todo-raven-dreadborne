@@ -108,10 +108,7 @@ export default function Home() {
       </ul>
 
       {/* Filters */}
-      <div
-        // id="filters"
-        className="flex justify-between items-center mt-4 text-gray-300"
-      >
+      <div className="flex justify-between items-center mt-4 text-gray-300">
         <span id="items-left">
           <span id="items-count">{itemsLeft.length}</span>{" "}
           {itemsLeft.length === 1 ? "item" : "items"} left
