@@ -1,15 +1,12 @@
-# Welcome to React Router!
+# Welcome to TODO app!
 
-A modern, production-ready template for building full-stack React applications using React Router.
+This demo showcases the difference between the default user experience for web applications and using view transitions for smooth animations
 
-## Features
+Default link:
+`https://react-todo-raven-dreadborne.vercel.app`
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+With view transitions link:
+`https://react-todo-raven-dreadborne-git-f-3fd50b-thedevbrian1s-projects.vercel.app/`
 
 ## Getting Started
 
