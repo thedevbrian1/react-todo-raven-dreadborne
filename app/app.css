@@ -40,62 +40,6 @@ span#items-count {
   contain: layout;
 }
 
-div#filters {
-  view-transition-name: filters;
-}
-
-/* @keyframes slide-out {
-  to {
-    transform: translateY(-20px);
-    opacity: 0;
-    scale: 0.85;
-  }
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-    scale: 0.85;
-  }
-} */
-
-/* ::view-transition-group(root) {
-  animation: none;
-} */
-
-::view-transition-old(list),
-::view-transition-new(list) {
-  /* Prevent the default animation,
-  so both views remain opacity:1 throughout the transition */
-  animation: none;
-  animation-timing-function: var(--ease-elastic-in-out-3);
-
-  /* Use normal blending,
-  so the new view sits on top and obscures the old view */
-  mix-blend-mode: normal;
-
-  /* Make the height the same as the group,
-  meaning the view size might not match its aspect-ratio. */
-  height: 100%;
-
-  /* Clip any overflow of the view */
-  overflow: clip;
-}
-
-::view-transition-old(list) {
-  /* Maintain the aspect ratio of the view,
-  by shrinking it to fit within the bounds of the element */
-  object-fit: contain;
-}
-
-/* The new view is the full image */
-::view-transition-new(list) {
-  /* Maintain the aspect ratio of the view,
-  by growing it to cover the bounds of the element */
-  object-fit: cover;
-}
-
 ::view-transition-old(items-count) {
   animation:
     var(--animation-fade-out) forwards,
@@ -111,4 +55,33 @@ div#filters {
     var(--animation-slide-in-up);
   animation-timing-function: var(--ease-elastic-in-out-3);
   animation-duration: 300ms;
+}
+
+::view-transition-old(list),
+::view-transition-new(list) {
+  /* Prevent the default animation,
+  so both views remain opacity:1 throughout the transition */
+  animation: none;
+  /* Use normal blending,
+  so the new view sits on top and obscures the old view */
+  mix-blend-mode: normal;
+  /* Make the height the same as the group,
+  meaning the view size might not match its aspect-ratio. */
+  height: 100%;
+  /* Clip any overflow of the view */
+  overflow: clip;
+}
+
+/* The old view is the thumbnail */
+::view-transition-old(list) {
+  /* Maintain the aspect ratio of the view,
+  by shrinking it to fit within the bounds of the element */
+  object-fit: contain;
+}
+
+/* The new view is the full image */
+::view-transition-new(list) {
+  /* Maintain the aspect ratio of the view,
+  by growing it to cover the bounds of the element */
+  object-fit: cover;
 }

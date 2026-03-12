@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { flushSync } from "react-dom";
 
 export function meta() {
   return [
@@ -158,7 +159,9 @@ function Filter({ text, filteredState, setFilteredState }) {
           setFilteredState(`${text.toLowerCase()}`);
         } else {
           document.startViewTransition(() => {
-            setFilteredState(`${text.toLowerCase()}`);
+            flushSync(() => {
+              setFilteredState(`${text.toLowerCase()}`);
+            });
           });
         }
       }}
