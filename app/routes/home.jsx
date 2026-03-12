@@ -67,6 +67,7 @@ export default function Home() {
             <li
               className="flex gap-2 items-center py-3"
               key={item.id}
+              // FIXME: Filtering animations does not work properly when <li> vtn's are set
               // style={{ viewTransitionName: `list-item-${item.id}` }}
             >
               <input
@@ -110,7 +111,9 @@ export default function Home() {
       {/* Filters */}
       <div className="flex justify-between items-center mt-4 text-gray-300">
         <span id="items-left">
-          <span id="items-count">{itemsLeft.length}</span>{" "}
+          <span id="items-count" className="tabular-nums">
+            {itemsLeft.length}
+          </span>{" "}
           {itemsLeft.length === 1 ? "item" : "items"} left
         </span>
         <div className="flex gap-2">
